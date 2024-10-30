@@ -1,0 +1,30 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity complemento_de_dois is
+    Port (
+        num_original : in  STD_LOGIC_VECTOR(7 downto 0);
+        num_complemento : in  STD_LOGIC_VECTOR(7 downto 0);
+        eh_complemento : out STD_LOGIC
+    );
+end complemento_de_dois;
+
+architecture Behavioral of complemento_de_dois is
+    signal complemento_calculado : STD_LOGIC_VECTOR(7 downto 0);
+begin
+    process(num_original)
+    begin
+        -- Inverte os bits do número original
+        complemento_calculado <= not num_original + "00000001"; -- Adiciona 1 para o complemento de dois
+        
+        -- Verifica se é o complemento
+        if complemento_calculado = num_complemento then
+            eh_complemento <= '1'; -- É complemento de dois
+        else
+            eh_complemento <= '0'; -- Não é complemento de dois
+        end if;
+    end process;
+
+end Behavioral;
